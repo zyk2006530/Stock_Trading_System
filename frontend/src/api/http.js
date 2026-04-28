@@ -1,8 +1,15 @@
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 
+function getBaseURL() {
+  if (import.meta.env.VITE_API_BASE) {
+    return import.meta.env.VITE_API_BASE;
+  }
+  return `${window.location.protocol}//${window.location.hostname}:8080`;
+}
+
 const http = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE || 'http://localhost:8080',
+  baseURL: getBaseURL(),
   timeout: 10000,
 });
 
