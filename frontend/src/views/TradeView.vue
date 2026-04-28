@@ -91,9 +91,9 @@ async function submitBuy() {
       price: Number(buyForm.price),
       quantity: Number(buyForm.quantity),
     });
-    ElMessage.success('Buy order submitted');
-  } catch (error) {
-    ElMessage.error(error.message || 'Buy order failed');
+    ElMessage.success('买入委托已提交');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loading.value = false;
   }
@@ -110,9 +110,9 @@ async function submitSell() {
       price: Number(sellForm.price),
       quantity: Number(sellForm.quantity),
     });
-    ElMessage.success('Sell order submitted');
-  } catch (error) {
-    ElMessage.error(error.message || 'Sell order failed');
+    ElMessage.success('卖出委托已提交');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loading.value = false;
   }
@@ -120,15 +120,15 @@ async function submitSell() {
 
 function validateOrder(form) {
   if (!form.stockCode || !form.stockCode.trim()) {
-    ElMessage.warning('Stock code is required');
+    ElMessage.warning('请输入股票代码');
     return false;
   }
   if (!form.price || Number(form.price) <= 0) {
-    ElMessage.warning('Price must be greater than 0');
+    ElMessage.warning('价格必须大于 0');
     return false;
   }
   if (!form.quantity || Number(form.quantity) <= 0) {
-    ElMessage.warning('Quantity must be greater than 0');
+    ElMessage.warning('数量必须大于 0');
     return false;
   }
   return true;

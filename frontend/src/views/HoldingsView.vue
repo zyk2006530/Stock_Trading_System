@@ -21,7 +21,6 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import { fetchHoldings } from '../api/client';
 
 const holdings = ref([]);
@@ -31,8 +30,8 @@ async function loadData() {
   loading.value = true;
   try {
     holdings.value = await fetchHoldings();
-  } catch (error) {
-    ElMessage.error(error.message || 'Failed to load holdings');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loading.value = false;
   }

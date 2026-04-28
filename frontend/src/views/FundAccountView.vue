@@ -39,7 +39,6 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import { fetchFundAccount } from '../api/client';
 import { formatMoney } from '../utils/format';
 
@@ -53,8 +52,8 @@ async function loadData() {
     const data = await fetchFundAccount();
     account.value = data.account;
     flows.value = data.flows || [];
-  } catch (error) {
-    ElMessage.error(error.message || 'Failed to load fund account');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loading.value = false;
   }

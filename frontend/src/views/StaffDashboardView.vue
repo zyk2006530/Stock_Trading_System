@@ -183,9 +183,9 @@ const linkForm = reactive({
 async function submitUser() {
   try {
     await createUser(userForm);
-    ElMessage.success('User created');
-  } catch (error) {
-    ElMessage.error(error.message || 'Create user failed');
+    ElMessage.success('用户创建成功');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 
@@ -196,72 +196,72 @@ async function submitFundCreate() {
       password: fundCreateForm.password,
       initialBalance: Number(fundCreateForm.initialBalance || 0),
     });
-    ElMessage.success('Fund account created');
-  } catch (error) {
-    ElMessage.error(error.message || 'Create fund account failed');
+    ElMessage.success('资金账户创建成功');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 
 async function approveFund() {
   try {
     await approveFundAccount(Number(fundActionForm.id));
-    ElMessage.success('Fund account approved');
-  } catch (error) {
-    ElMessage.error(error.message || 'Approve failed');
+    ElMessage.success('资金账户已审核通过');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 
 async function depositFundAction() {
   try {
     await depositFund(Number(fundActionForm.id), { amount: Number(fundActionForm.amount) });
-    ElMessage.success('Deposit done');
-  } catch (error) {
-    ElMessage.error(error.message || 'Deposit failed');
+    ElMessage.success('入金成功');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 
 async function withdrawFundAction() {
   try {
     await withdrawFund(Number(fundActionForm.id), { amount: Number(fundActionForm.amount) });
-    ElMessage.success('Withdraw done');
-  } catch (error) {
-    ElMessage.error(error.message || 'Withdraw failed');
+    ElMessage.success('出金成功');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 
 async function markFundLostAction() {
   try {
     await markFundLost(Number(fundActionForm.id));
-    ElMessage.success('Marked lost');
-  } catch (error) {
-    ElMessage.error(error.message || 'Operation failed');
+    ElMessage.success('已标记挂失');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 
 async function reopenFundAction() {
   try {
     await reopenFund(Number(fundActionForm.id));
-    ElMessage.success('Reopened');
-  } catch (error) {
-    ElMessage.error(error.message || 'Operation failed');
+    ElMessage.success('已重新启用');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 
 async function closeFundAction() {
   try {
     await closeFund(Number(fundActionForm.id));
-    ElMessage.success('Closed');
-  } catch (error) {
-    ElMessage.error(error.message || 'Operation failed');
+    ElMessage.success('已销户');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 
 async function updateFundPasswordAction() {
   try {
     await updateFundPassword(Number(fundPasswordForm.id), { newPassword: fundPasswordForm.newPassword });
-    ElMessage.success('Password updated');
-  } catch (error) {
-    ElMessage.error(error.message || 'Update failed');
+    ElMessage.success('密码更新成功');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 
@@ -271,36 +271,36 @@ async function submitSecuritiesCreate() {
       userId: Number(secCreateForm.userId),
       fundAccountId: secCreateForm.fundAccountId ? Number(secCreateForm.fundAccountId) : null,
     });
-    ElMessage.success('Securities account created');
-  } catch (error) {
-    ElMessage.error(error.message || 'Create securities account failed');
+    ElMessage.success('证券账户创建成功');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 
 async function markSecuritiesLostAction() {
   try {
     await markSecuritiesLost(Number(secActionForm.id));
-    ElMessage.success('Marked lost');
-  } catch (error) {
-    ElMessage.error(error.message || 'Operation failed');
+    ElMessage.success('已标记挂失');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 
 async function reopenSecuritiesAction() {
   try {
     await reopenSecurities(Number(secActionForm.id));
-    ElMessage.success('Reopened');
-  } catch (error) {
-    ElMessage.error(error.message || 'Operation failed');
+    ElMessage.success('已重新启用');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 
 async function closeSecuritiesAction() {
   try {
     await closeSecurities(Number(secActionForm.id));
-    ElMessage.success('Closed');
-  } catch (error) {
-    ElMessage.error(error.message || 'Operation failed');
+    ElMessage.success('已销户');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 
@@ -310,9 +310,9 @@ async function linkAccountsAction() {
       fundAccountId: Number(linkForm.fundAccountId),
       securitiesAccountId: Number(linkForm.securitiesAccountId),
     });
-    ElMessage.success('Accounts linked');
-  } catch (error) {
-    ElMessage.error(error.message || 'Link failed');
+    ElMessage.success('账户关联成功');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 </script>

@@ -22,7 +22,6 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import { fetchTrades } from '../api/client';
 
 const trades = ref([]);
@@ -32,8 +31,8 @@ async function loadData() {
   loading.value = true;
   try {
     trades.value = await fetchTrades();
-  } catch (error) {
-    ElMessage.error(error.message || 'Failed to load trades');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loading.value = false;
   }

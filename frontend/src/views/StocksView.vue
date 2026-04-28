@@ -66,7 +66,6 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import { listStocks, searchStocks, getStockStats, getStockTrades } from '../api/stocks';
 
 const stocks = ref([]);
@@ -80,8 +79,8 @@ async function loadStocks() {
   loading.value = true;
   try {
     stocks.value = await listStocks();
-  } catch (error) {
-    ElMessage.error(error.message || 'Failed to load stocks');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loading.value = false;
   }
@@ -91,8 +90,8 @@ async function handleSearch() {
   loading.value = true;
   try {
     stocks.value = await searchStocks(keyword.value.trim());
-  } catch (error) {
-    ElMessage.error(error.message || 'Search failed');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loading.value = false;
   }
@@ -105,8 +104,8 @@ async function handleSelect(row) {
       getStockStats(row.code),
       getStockTrades(row.code),
     ]);
-  } catch (error) {
-    ElMessage.error(error.message || 'Failed to load details');
+  } catch {
+    // http.js 已统一处理错误提示
   }
 }
 

@@ -40,7 +40,6 @@
 <script setup>
 import { reactive, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { ElMessage } from 'element-plus';
 import { login, firstLogin } from '../api/auth';
 import { useAuthStore } from '../store/auth';
 
@@ -68,8 +67,8 @@ async function handleLogin() {
     const data = await login(loginForm);
     authStore.setAuth(data.token, data.user);
     router.push(route.query.redirect || '/stocks');
-  } catch (error) {
-    ElMessage.error(error.message || 'Login failed');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loading.value = false;
   }
@@ -81,8 +80,8 @@ async function handleFirstLogin() {
     const data = await firstLogin(firstLoginForm);
     authStore.setAuth(data.token, data.user);
     router.push(route.query.redirect || '/stocks');
-  } catch (error) {
-    ElMessage.error(error.message || 'Verification failed');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loading.value = false;
   }

@@ -8,14 +8,32 @@
       :ellipsis="false"
       router
     >
-      <el-menu-item index="/stocks">Market</el-menu-item>
-      <el-menu-item v-if="authStore.isAuthenticated" index="/fund-account">Fund</el-menu-item>
-      <el-menu-item v-if="authStore.isAuthenticated" index="/holdings">Holdings</el-menu-item>
-      <el-menu-item v-if="authStore.isAuthenticated" index="/trade">Trade</el-menu-item>
-      <el-menu-item v-if="authStore.isAuthenticated" index="/orders">Orders</el-menu-item>
-      <el-menu-item v-if="authStore.isAuthenticated" index="/trades">Trades</el-menu-item>
-      <el-menu-item v-if="authStore.user?.role === 'STAFF'" index="/staff">Staff</el-menu-item>
-      <el-menu-item v-if="authStore.user?.role === 'ADMIN'" index="/admin">Admin</el-menu-item>
+      <!-- 未登录：只显示 Market -->
+      <template v-if="!authStore.isAuthenticated">
+        <el-menu-item index="/stocks">Market</el-menu-item>
+      </template>
+
+      <!-- USER 角色 -->
+      <template v-else-if="authStore.user?.role === 'USER'">
+        <el-menu-item index="/stocks">Market</el-menu-item>
+        <el-menu-item index="/fund-account">Fund</el-menu-item>
+        <el-menu-item index="/holdings">Holdings</el-menu-item>
+        <el-menu-item index="/trade">Trade</el-menu-item>
+        <el-menu-item index="/orders">Orders</el-menu-item>
+        <el-menu-item index="/trades">Trades</el-menu-item>
+      </template>
+
+      <!-- STAFF 角色 -->
+      <template v-else-if="authStore.user?.role === 'STAFF'">
+        <el-menu-item index="/stocks">Market</el-menu-item>
+        <el-menu-item index="/staff">Staff Dashboard</el-menu-item>
+      </template>
+
+      <!-- ADMIN 角色 -->
+      <template v-else-if="authStore.user?.role === 'ADMIN'">
+        <el-menu-item index="/stocks">Market</el-menu-item>
+        <el-menu-item index="/admin">Admin Dashboard</el-menu-item>
+      </template>
     </el-menu>
     <div class="auth-actions">
       <span v-if="authStore.user" class="user-name">

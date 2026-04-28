@@ -25,7 +25,6 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import { fetchOrders } from '../api/client';
 
 const orders = ref([]);
@@ -35,8 +34,8 @@ async function loadData() {
   loading.value = true;
   try {
     orders.value = await fetchOrders();
-  } catch (error) {
-    ElMessage.error(error.message || 'Failed to load orders');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loading.value = false;
   }

@@ -102,7 +102,6 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { ElMessage } from 'element-plus';
 import {
   fetchAdminOrders,
   fetchAdminTrades,
@@ -127,8 +126,8 @@ async function loadOrders() {
   loadingOrders.value = true;
   try {
     orders.value = await fetchAdminOrders(orderFilter.value.trim() || undefined);
-  } catch (error) {
-    ElMessage.error(error.message || 'Failed to load orders');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loadingOrders.value = false;
   }
@@ -138,8 +137,8 @@ async function loadTrades() {
   loadingTrades.value = true;
   try {
     trades.value = await fetchAdminTrades();
-  } catch (error) {
-    ElMessage.error(error.message || 'Failed to load trades');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loadingTrades.value = false;
   }
@@ -149,8 +148,8 @@ async function loadStats() {
   loadingStats.value = true;
   try {
     stats.value = await fetchAdminOrderStats();
-  } catch (error) {
-    ElMessage.error(error.message || 'Failed to load stats');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loadingStats.value = false;
   }
@@ -160,8 +159,8 @@ async function loadAccounts() {
   loadingAccounts.value = true;
   try {
     accounts.value = await fetchAdminAccounts();
-  } catch (error) {
-    ElMessage.error(error.message || 'Failed to load accounts');
+  } catch {
+    // http.js 已统一处理错误提示
   } finally {
     loadingAccounts.value = false;
   }
